@@ -1,28 +1,35 @@
-# Find the tests source files
-file(GLOB_RECURSE SOMBRA_PHYSICS_TEST_SOURCES "./*.cpp")
+# Find the dependencies
+find_package(GTest)
+
+# Find the source files
+file(GLOB_RECURSE TEST_SPHYS_SOURCES "*.cpp")
 
 # Create the executable
-add_executable(SombraPhysicsTest ${SOMBRA_PHYSICS_TEST_SOURCES})
+add_executable(TestSPHYS ${TEST_SPHYS_SOURCES})
 
-# Add the include directories
-target_include_directories(SombraPhysicsTest PRIVATE "test")
-
-# Add the compiler options
-set_target_properties(SombraPhysicsTest PROPERTIES
+# Add the target properties
+set_target_properties(TestSPHYS PROPERTIES
 	CXX_STANDARD			17
-	CXX_STANDARD_REQUIRED	On
+	CXX_STANDARD_REQUIRED	ON
+)
+target_include_directories(TestSPHYS PRIVATE
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+	$<INSTALL_INTERFACE:include>
 )
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-	target_compile_options(SombraPhysicsTest PRIVATE "-Wall" "-Wextra" "-Werror")
+	target_compile_options(TestSPHYS PRIVATE "-Wall" "-Wextra" "-Wpedantic")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-	target_compile_options(SombraPhysicsTest PRIVATE "/W4" "-D_CRT_SECURE_NO_WARNINGS")
+	target_compile_options(TestSPHYS PRIVATE "/W4" "-D_CRT_SECURE_NO_WARNINGS")
 endif()
 
 # Link the dependencies
-target_link_libraries(SombraPhysicsTest PRIVATE SombraPhysics CONAN_PKG::gtest)
+target_link_libraries(TestSPHYS PRIVATE gtest::gtest SombraPhysics)
 
 # Add the test
-add_test(SombraPhysicsTest SombraPhysicsTest)
+add_test(TestSPHYS TestSPHYS)
 
 # Install the target
-install(TARGETS SombraPhysicsTest DESTINATION ${CMAKE_INSTALL_BINDIR})
+set_target_properties(TestSPHYS PROPERTIES
+	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}"
+)
+install(TARGETS TestSPHYS DESTINATION ${CMAKE_INSTALL_BINDIR})

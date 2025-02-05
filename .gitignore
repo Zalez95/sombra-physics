@@ -1,3 +1,6 @@
 build/
+.vscode/
 doc/*
+test/*.spv
 !doc/Doxyfile.in
+CMakeUserPresets.json

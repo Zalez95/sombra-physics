@@ -1,5 +1,4 @@
-cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
-include(GNUInstallDirs)
+cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 
 ###############################################################################
 # 								SOMBRA_PHYSICS
@@ -8,16 +7,18 @@ include(GNUInstallDirs)
 project(SombraPhysics LANGUAGES CXX)
 set(SOMBRA_PHYSICS_VERSION_MAJOR "1")
 set(SOMBRA_PHYSICS_VERSION_MINOR "0")
-set(SOMBRA_PHYSICS_VERSION "${SOMBRA_PHYSICS_VERSION_MAJOR}.${SOMBRA_PHYSICS_VERSION_MINOR}")
+set(SOMBRA_PHYSICS_VERSION_REVISION "0")
+set(SOMBRA_PHYSICS_VERSION
+	"${SOMBRA_PHYSICS_VERSION_MAJOR}.${SOMBRA_PHYSICS_VERSION_MINOR}.${SOMBRA_PHYSICS_VERSION_REVISION}"
+)
 
 # Sombra Physics Options
-option(SOMBRA_PHYSICS_BUILD_DOC "Generate the Sombra Physics documentation" ON)
-option(SOMBRA_PHYSICS_BUILD_TESTS "Build the Sombra Physics test programs" ON)
+option(SOMBRA_PHYSICS_BUILD_DOC "Generate the SombraPhysics documentation" ON)
+option(SOMBRA_PHYSICS_BUILD_TEST "Generate the SombraPhysics test program" ON)
 
 # Find the dependencies
-include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
-conan_basic_setup(TARGETS)
-
+find_package(glm)
+find_package(stdext)
 find_package(Doxygen)
 
 # Find the library source files
@@ -44,9 +45,14 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
 endif()
 
 # Link the dependencies
-target_link_libraries(SombraPhysics PUBLIC CONAN_PKG::stdext CONAN_PKG::glm)
+target_link_libraries(SombraPhysics PUBLIC glm::glm stdext::stdext)
 
 # Install the target
+set_target_properties(SombraPhysics PROPERTIES
+	ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}"
+	LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}"
+	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}"
+)
 install(TARGETS SombraPhysics EXPORT SombraPhysicsTargets)
 install(EXPORT SombraPhysicsTargets
 	FILE SombraPhysicsTargets.cmake
@@ -69,6 +75,6 @@ if(SOMBRA_PHYSICS_BUILD_DOC AND DOXYGEN_FOUND)
 endif()
 
 # Create the tests
-if(SOMBRA_PHYSICS_BUILD_TESTS)
+if(SOMBRA_PHYSICS_BUILD_TEST)
 	add_subdirectory(test)
 endif()
