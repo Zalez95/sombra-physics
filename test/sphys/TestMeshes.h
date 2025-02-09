@@ -3,10 +3,10 @@
 sphys::HalfEdgeMesh createTestPolyhedron1();
 sphys::HalfEdgeMesh createTestPolyhedron2();
 sphys::HalfEdgeMesh createTestPolyhedron3();
-std::pair<sphys::HalfEdgeMesh, stdext::PackedVector<glm::vec3>> createTestMesh1();
-std::pair<sphys::HalfEdgeMesh, stdext::PackedVector<glm::vec3>> createTestMesh2();
+std::pair<sphys::HalfEdgeMesh, stdext::ReleaseVector<glm::vec3>> createTestMesh1();
+std::pair<sphys::HalfEdgeMesh, stdext::ReleaseVector<glm::vec3>> createTestMesh2();
 std::vector<sphys::HalfEdgeMesh> createTestMesh3();
-std::pair<sphys::HalfEdgeMesh, stdext::PackedVector<glm::vec3>> createTestMesh4();
+std::pair<sphys::HalfEdgeMesh, stdext::ReleaseVector<glm::vec3>> createTestMesh4();
 sphys::HalfEdgeMesh createTestMesh5();
 std::vector<sphys::HalfEdgeMesh> createTestMesh6();
 sphys::HalfEdgeMesh createTestPlane1();

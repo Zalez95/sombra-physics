@@ -75,14 +75,14 @@ namespace sphys {
 	template <unsigned int maxHeight>
 	void HalfEdgeMeshRaycast<maxHeight>::buildKDTree(
 		const HalfEdgeMesh* mesh,
-		const stdext::PackedVector<glm::vec3>* faceNormals
+		const stdext::ReleaseVector<glm::vec3>* faceNormals
 	) {
 		mMesh = mesh;
 		mFaceNormals = faceNormals;
 		mKDTree.clear();
 		mIRootNode = -1;
 
-		stdext::FixedVector<KDBuildStackContent, 2 * maxHeight> stack;
+		stdext::ArrayVector<KDBuildStackContent, 2 * maxHeight> stack;
 
 		// Push the root node to the stack
 		std::vector<int> allFaceIndices;
@@ -165,7 +165,7 @@ namespace sphys {
 	{
 		HEMRayHit ret = { false, -1, glm::vec3(0.0f), std::numeric_limits<float>::max() };
 
-		stdext::FixedVector<KDHitStackContent, 2 * maxHeight> stack;
+		stdext::ArrayVector<KDHitStackContent, 2 * maxHeight> stack;
 
 		// Push the root node to the stack
 		stack.push_back({ KDHitStackContent::Check, &ret, mIRootNode, HEMRayHit(), HEMRayHit() });

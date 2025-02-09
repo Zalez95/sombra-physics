@@ -3,7 +3,7 @@
 #include <limits>
 #include <algorithm>
 #include <glm/gtc/epsilon.hpp>
-#include <stdext/FixedVector.h>
+#include <stdext/ArrayVector.h>
 #include "sphys/collision/AABB.h"
 #include "sphys/collision/QuickHull.h"
 #include "sphys/collision/HalfEdgeMeshExt.h"
@@ -59,8 +59,8 @@ namespace sphys {
 	void QuickHull::resetData()
 	{
 		mConvexHullMesh = HalfEdgeMesh();
-		mConvexHullNormals = stdext::PackedVector<glm::vec3>();
-		mFaceOutsideVertices = stdext::PackedVector<std::vector<int>>();
+		mConvexHullNormals = stdext::ReleaseVector<glm::vec3>();
+		mFaceOutsideVertices = stdext::ReleaseVector<std::vector<int>>();
 		mVertexIndexMap = std::unordered_map<int, int>();
 	}
 
@@ -225,7 +225,7 @@ namespace sphys {
 
 
 	int QuickHull::getFurthestVertexFromEdge(
-		const stdext::PackedVector<HEVertex>& vertices,
+		const stdext::ReleaseVector<HEVertex>& vertices,
 		const std::vector<int>& vertexIndices, int iVertex1, int iVertex2
 	) const
 	{
@@ -246,7 +246,7 @@ namespace sphys {
 
 
 	std::vector<int> QuickHull::filterOutsideVertices(
-		const stdext::PackedVector<HEVertex>& vertices, const std::vector<int>& vertexIndices,
+		const stdext::ReleaseVector<HEVertex>& vertices, const std::vector<int>& vertexIndices,
 		const glm::vec3& planeNormal, int iVertex1, int iVertex2
 	) const
 	{
@@ -339,7 +339,7 @@ namespace sphys {
 		std::sort(meshVertexIndices.begin(), meshVertexIndices.end());
 
 		// Add the vertices to the convex hull
-		stdext::FixedVector<int, 4> chVertexIndices;
+		stdext::ArrayVector<int, 4> chVertexIndices;
 		for (int iMeshVertex : iSimplexVertices) {
 			int iConvexHullVertex = addVertex(mConvexHullMesh, originalMesh.vertices[iMeshVertex].location);
 			mVertexIndexMap.emplace(iMeshVertex, iConvexHullVertex);

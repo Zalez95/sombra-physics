@@ -1,7 +1,7 @@
 #ifndef SPHYS_POLYTOPE_H
 #define SPHYS_POLYTOPE_H
 
-#include <stdext/FixedVector.h>
+#include <stdext/ArrayVector.h>
 #include "sphys/collision/SupportPoint.h"
 #include "sphys/collision/HalfEdgeMesh.h"
 
@@ -50,13 +50,13 @@ namespace sphys {
 		HalfEdgeMesh mMesh;
 
 		/** The normal vectors of each HEFace */
-		stdext::PackedVector<glm::vec3> mFaceNormals;
+		stdext::ReleaseVector<glm::vec3> mFaceNormals;
 
 		/** The distance data of eahc HEFace */
-		stdext::PackedVector<FaceDistanceData> mFaceDistances;
+		stdext::ReleaseVector<FaceDistanceData> mFaceDistances;
 
 		/** The SupportPoint of each HEVertex */
-		stdext::PackedVector<SupportPoint> mVertexSupportPoints;
+		stdext::ReleaseVector<SupportPoint> mVertexSupportPoints;
 
 	public:		//Functions
 		/** Creates a new Polytope from the given simplex points by expanding it
@@ -66,7 +66,7 @@ namespace sphys {
 		 * @param	precision the precision of the projected points of the
 		 *			polytope */
 		Polytope(
-			const stdext::FixedVector<SupportPoint, 4>& simplex,
+			const stdext::ArrayVector<SupportPoint, 4>& simplex,
 			float precision
 		);
 
@@ -75,7 +75,7 @@ namespace sphys {
 
 		/** @return	the normal vectors of the HEFaces of the Polytope's
 		 *			HalfEdgeMesh */
-		const stdext::PackedVector<glm::vec3>& getNormals() const
+		const stdext::ReleaseVector<glm::vec3>& getNormals() const
 		{ return mFaceNormals; };
 
 		/** Returns the SupportPoint of the given Polytope HEVertex
@@ -110,7 +110,7 @@ namespace sphys {
 		 * otherwise
 		 *
 		 * @param	faceIndices the indices of the new face's vertices */
-		int addFace(const stdext::FixedVector<int, 3>& faceIndices);
+		int addFace(const stdext::ArrayVector<int, 3>& faceIndices);
 
 		/** Removes the given HEFace and its data from the Polytope
 		 *

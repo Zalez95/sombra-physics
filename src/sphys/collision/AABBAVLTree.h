@@ -1,7 +1,7 @@
 #ifndef SPHYS_AABB_AVL_TREE_H
 #define SPHYS_AABB_AVL_TREE_H
 
-#include <stdext/PackedVector.h>
+#include <stdext/ReleaseVector.h>
 #include "sphys/collision/Ray.h"
 
 namespace sphys {
@@ -30,7 +30,7 @@ namespace sphys {
 
 	private:	// Attributes
 		/** All the Nodes of the Tree */
-		stdext::PackedVector<TreeNode> mNodes;
+		stdext::ReleaseVector<TreeNode> mNodes;
 
 		/** The index of the root node in @see mNodes */
 		std::size_t mRootIndex;

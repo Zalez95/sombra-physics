@@ -21,7 +21,7 @@ namespace sphys {
 	private:	// Nested types
 		using DualGraphVertex = GraphVertex< std::vector<int> >;
 		using DualGraph = Graph< std::vector<int> >;
-		using FaceNormals = stdext::PackedVector<glm::vec3>;
+		using FaceNormals = stdext::ReleaseVector<glm::vec3>;
 		using HEMeshWithNormals = std::pair<HalfEdgeMesh, FaceNormals>;
 
 		/** Struct QHACDData, it holds the data that the HACD algorithm will

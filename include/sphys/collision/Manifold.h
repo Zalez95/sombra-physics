@@ -3,7 +3,7 @@
 
 #include <array>
 #include <bitset>
-#include <stdext/FixedVector.h>
+#include <stdext/ArrayVector.h>
 #include "Contact.h"
 
 namespace sphys {
@@ -35,7 +35,7 @@ namespace sphys {
 		std::array<const Collider*, 2> colliders;
 
 		/** All the Contacs the Contact Manifold can hold */
-		stdext::FixedVector<Contact, kMaxContacts> contacts;
+		stdext::ArrayVector<Contact, kMaxContacts> contacts;
 
 		/** Creates a new Manifold
 		 *

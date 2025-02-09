@@ -58,7 +58,7 @@ namespace sphys {
 		 *			calculated successfully and the closest SupportPoint to
 		 *			the origin */
 		std::pair<bool, SupportPoint> calculateClosestPoint(
-			const Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+			const Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 		) const;
 
 		/** Implements @see calculateClosestPoint with a simplex of 1 vertex
@@ -72,7 +72,7 @@ namespace sphys {
 		 *			calculated successfully and the closest SupportPoint to
 		 *			the origin */
 		std::pair<bool, SupportPoint> calculateClosestPoint1(
-			const Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+			const Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 		) const;
 
 		/** Implements @see calculateClosestPoint with a simplex of 2 vertices
@@ -86,7 +86,7 @@ namespace sphys {
 		 *			calculated successfully and the closest SupportPoint to
 		 *			the origin */
 		std::pair<bool, SupportPoint> calculateClosestPoint2(
-			const Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+			const Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 		) const;
 
 		/** Implements @see calculateClosestPoint with a simplex of 3 vertices
@@ -100,7 +100,7 @@ namespace sphys {
 		 *			calculated successfully and the closest SupportPoint to
 		 *			the origin */
 		std::pair<bool, SupportPoint> calculateClosestPoint3(
-			const Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+			const Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 		) const;
 
 		/** Implements @see calculateClosestPoint with a simplex of 4 vertices
@@ -114,7 +114,7 @@ namespace sphys {
 		 *			calculated successfully and the closest SupportPoint to
 		 *			the origin */
 		std::pair<bool, SupportPoint> calculateClosestPoint4(
-			const Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+			const Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 		) const;
 
 		/** Removes the simplex points that arent being used for calculating the
@@ -125,7 +125,7 @@ namespace sphys {
 		 *			of the simplex were used for calculating the closest point
 		 *			to the origin */
 		static void reduce(
-			Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+			Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 		);
 	};
 

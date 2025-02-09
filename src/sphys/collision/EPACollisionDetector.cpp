@@ -180,7 +180,7 @@ namespace sphys {
 		int iClosestFace = -1;
 		float closestSeparation = std::numeric_limits<float>::max();
 		std::vector<int> overlappingFaces, horizon, facesToRemove;
-		stdext::FixedVector<int, 3> closestFaceIndices;
+		stdext::ArrayVector<int, 3> closestFaceIndices;
 		do {
 			// 1. Search a new SupportPoint along the HEFace's closest point
 			// direction

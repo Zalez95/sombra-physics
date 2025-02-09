@@ -51,7 +51,7 @@ namespace sphys {
 	 * @return	the normal vector */
 	glm::vec3 calculateVertexNormal(
 		const HalfEdgeMesh& meshData,
-		const stdext::PackedVector<glm::vec3>& faceNormals,
+		const stdext::ReleaseVector<glm::vec3>& faceNormals,
 		int iVertex
 	);
 
@@ -111,7 +111,7 @@ namespace sphys {
 	 * @note	the meshData must be convex */
 	float calculateVolume(
 		const HalfEdgeMesh& meshData,
-		const stdext::PackedVector<glm::vec3>& faceNormals
+		const stdext::ReleaseVector<glm::vec3>& faceNormals
 	);
 
 
@@ -145,7 +145,7 @@ namespace sphys {
 	 *			visible from the eyePoint perspective */
 	void calculateHorizon(
 		const HalfEdgeMesh& meshData,
-		const stdext::PackedVector<glm::vec3>& faceNormals,
+		const stdext::ReleaseVector<glm::vec3>& faceNormals,
 		const glm::vec3& eyePoint, int iInitialFace,
 		std::vector<int>& horizonEdges, std::vector<int>& visibleFaces
 	);

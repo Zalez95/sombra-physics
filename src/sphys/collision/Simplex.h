@@ -1,12 +1,12 @@
 #ifndef SPHYS_SIMPLEX_H
 #define SPHYS_SIMPLEX_H
 
-#include <stdext/FixedVector.h>
+#include <stdext/ArrayVector.h>
 #include "SupportPoint.h"
 
 namespace sphys {
 
-	using Simplex = stdext::FixedVector<SupportPoint, 4>;
+	using Simplex = stdext::ArrayVector<SupportPoint, 4>;
 
 
 	/** Checks if the origin of coordinates in CSO space is inside the

@@ -26,11 +26,11 @@ namespace sphys {
 		HalfEdgeMesh mConvexHullMesh;
 
 		/** The normal vector of each HEFace in the convex hull */
-		stdext::PackedVector<glm::vec3> mConvexHullNormals;
+		stdext::ReleaseVector<glm::vec3> mConvexHullNormals;
 
 		/** The outside vertex indices of each HEFace in the convex hull
 		 * @note	the outside vertex indices are sorted ascendently */
-		stdext::PackedVector<std::vector<int>> mFaceOutsideVertices;
+		stdext::ReleaseVector<std::vector<int>> mFaceOutsideVertices;
 
 		/** Maps the indices of the vertices in the current Mesh with the ones
 		 * in the convex hull */
@@ -49,7 +49,7 @@ namespace sphys {
 
 		/** @return	the normal vectors of the HEFaces of the convex hull
 		 *			HalfEdgeMesh */
-		const stdext::PackedVector<glm::vec3>& getNormals() const
+		const stdext::ReleaseVector<glm::vec3>& getNormals() const
 		{ return mConvexHullNormals; };
 
 		/** Calculates the convex hull of the given Mesh with the QuickHull
@@ -93,7 +93,7 @@ namespace sphys {
 		 * @param	iVertex2 the second of the vertices of the edge
 		 * @return	the index of the furthest vertex */
 		int getFurthestVertexFromEdge(
-			const stdext::PackedVector<HEVertex>& vertices,
+			const stdext::ReleaseVector<HEVertex>& vertices,
 			const std::vector<int>& vertexIndices, int iVertex1, int iVertex2
 		) const;
 
@@ -108,7 +108,7 @@ namespace sphys {
 		 * @param	iVertex1 the index of the second vertex of the edge
 		 * @return	the indices of the vertices that are outside the edge */
 		std::vector<int> filterOutsideVertices(
-			const stdext::PackedVector<HEVertex>& vertices,
+			const stdext::ReleaseVector<HEVertex>& vertices,
 			const std::vector<int>& vertexIndices,
 			const glm::vec3& planeNormal, int iVertex1, int iVertex2
 		) const;

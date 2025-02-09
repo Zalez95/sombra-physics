@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <functional>
-#include <stdext/PackedVector.h>
+#include <stdext/ReleaseVector.h>
 #include "Ray.h"
 
 namespace sphys {
@@ -34,7 +34,7 @@ namespace sphys {
 		float mEpsilon;
 
 		/** The Colliders to check if they collide between each other */
-		stdext::PackedVector<ColliderData> mColliders;
+		stdext::ReleaseVector<ColliderData> mColliders;
 
 		/** The AABB Tree used for the coarse collision detection, the user
 		 * data is an index to a Collider in @see mColliders */

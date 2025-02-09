@@ -4,7 +4,7 @@
 #include <map>
 #include <mutex>
 #include <stdext/MathUtils.h>
-#include <stdext/PackedVector.h>
+#include <stdext/ReleaseVector.h>
 #include "CoarseCollisionDetector.h"
 #include "FineCollisionDetector.h"
 
@@ -67,7 +67,7 @@ namespace sphys {
 		std::vector<ColliderPair> mCoarseCollidersColliding;
 
 		/** All the Manifolds that the CollisionDetector can hold */
-		stdext::PackedVector<Manifold> mManifolds;
+		stdext::ReleaseVector<Manifold> mManifolds;
 
 		/** Maps a pair of Colliders with the index of the Manifold of their
 		 * collision */

@@ -26,7 +26,7 @@ namespace sphys {
 			std::size_t iFrictionConstraints[2];
 		};
 
-		using ManifoldConstraintIndices = stdext::FixedVector<
+		using ManifoldConstraintIndices = stdext::ArrayVector<
 			ContactConstraintIndices, Manifold::kMaxContacts
 		>;
 
@@ -41,10 +41,10 @@ namespace sphys {
 		> mManifoldConstraintIndicesMap;
 
 		/** The NormalConstraints of all the Contacts */
-		stdext::PackedVector<NormalConstraint> mContactNormalConstraints;
+		stdext::ReleaseVector<NormalConstraint> mContactNormalConstraints;
 
 		/** The FrictionConstraints of all the Contacts */
-		stdext::PackedVector<FrictionConstraint> mContactFrictionConstraints;
+		stdext::ReleaseVector<FrictionConstraint> mContactFrictionConstraints;
 
 		/** The mutex used for protecting @see mManifoldConstraintIndicesMap,
 		 * @see mContactNormalConstraints and

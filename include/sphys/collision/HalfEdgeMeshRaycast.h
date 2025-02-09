@@ -1,7 +1,7 @@
 #ifndef SPHYS_HALF_EDGE_MESH_RAYCAST_H
 #define SPHYS_HALF_EDGE_MESH_RAYCAST_H
 
-#include <stdext/FixedVector.h>
+#include <stdext/ArrayVector.h>
 #include "AABB.h"
 #include "HalfEdgeMesh.h"
 
@@ -51,7 +51,7 @@ namespace sphys {
 
 		/** A kd-tree used for splitting the HEFaces, the tree structure is
 		 * stored inside a vector */
-		using Tree = stdext::FixedVector<TreeNode, kMaxNumNodes>;
+		using Tree = stdext::ArrayVector<TreeNode, kMaxNumNodes>;
 
 	private:	// Attributes
 		/** The epsilon value needed for the comparisons with the half rays */
@@ -61,7 +61,7 @@ namespace sphys {
 		const HalfEdgeMesh* mMesh;
 
 		/** The normal vectors of the HalfEdgeMesh HEFaces */
-		const stdext::PackedVector<glm::vec3>* mFaceNormals;
+		const stdext::ReleaseVector<glm::vec3>* mFaceNormals;
 
 		/** The binary tree that will be used for splitting the mesh HEFaces
 		 * and store their respective bounding spheres */
@@ -87,7 +87,7 @@ namespace sphys {
 		 *			HEFaces */
 		void buildKDTree(
 			const HalfEdgeMesh* mesh,
-			const stdext::PackedVector<glm::vec3>* faceNormals
+			const stdext::ReleaseVector<glm::vec3>* faceNormals
 		);
 
 		/** Calculates the closest ray-mesh intersection iteratively

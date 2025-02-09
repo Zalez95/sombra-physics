@@ -6,11 +6,11 @@
 
 namespace sphys {
 
-	Polytope::Polytope(const stdext::FixedVector<SupportPoint, 4>& simplex, float precision) :
+	Polytope::Polytope(const stdext::ArrayVector<SupportPoint, 4>& simplex, float precision) :
 		mPrecision(precision)
 	{
 		// Add the HEVertices
-		stdext::FixedVector<int, 4> vertexIndices = {
+		stdext::ArrayVector<int, 4> vertexIndices = {
 			addVertex(simplex[0]), addVertex(simplex[1]),
 			addVertex(simplex[2]), addVertex(simplex[3])
 		};
@@ -46,7 +46,7 @@ namespace sphys {
 	}
 
 
-	int Polytope::addFace(const stdext::FixedVector<int, 3>& faceIndices)
+	int Polytope::addFace(const stdext::ArrayVector<int, 3>& faceIndices)
 	{
 		int iFace = sphys::addFace(mMesh, faceIndices.begin(), faceIndices.end());
 

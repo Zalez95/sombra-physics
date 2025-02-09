@@ -3,7 +3,7 @@
 
 #include <unordered_map>
 #include <glm/glm.hpp>
-#include <stdext/PackedVector.h>
+#include <stdext/ReleaseVector.h>
 #include <stdext/MathUtils.h>
 
 namespace sphys {
@@ -74,13 +74,13 @@ namespace sphys {
 	struct HalfEdgeMesh
 	{
 		/** The HEVertices of the HalfEdgeMesh */
-		stdext::PackedVector<HEVertex> vertices;
+		stdext::ReleaseVector<HEVertex> vertices;
 
 		/** The HEEdges of the HalfEdgeMesh */
-		stdext::PackedVector<HEEdge> edges;
+		stdext::ReleaseVector<HEEdge> edges;
 
 		/** The HEFaces of the HalfEdgeMesh */
-		stdext::PackedVector<HEFace> faces;
+		stdext::ReleaseVector<HEFace> faces;
 
 		/** Maps two HEVertex indices with the HEEdge that references them */
 		std::unordered_map<std::pair<int, int>, int, stdext::PairHash>
@@ -93,7 +93,7 @@ namespace sphys {
 	 * @param	meshData the HalfEdgeMesh to add the HEVertex
 	 * @param	point the 3D coordintes of the new HEVertex
 	 * @return	the index of the new HEVertex in the HalfEdgeMesh vertices
-	 *			PackedVector (the HEVertex is added with the emplace
+	 *			ReleaseVector (the HEVertex is added with the emplace
 	 *			function) */
 	int addVertex(HalfEdgeMesh& meshData, const glm::vec3& point);
 
@@ -136,7 +136,7 @@ namespace sphys {
 	 * @param	end an iterator to the past-the-end HEVertex index of the new
 	 *			HEFace
 	 * @return	the index of the new HEFace in the HalfEdgeMesh faces
-	 *			PackedVector (the HEFace is added with the emplace function),
+	 *			ReleaseVector (the HEFace is added with the emplace function),
 	 *			-1 if the number of HEVertices is less than 3
 	 * @note	faces vertex indices must be added in counter-clockwise order */
 	template <class InputIterator>

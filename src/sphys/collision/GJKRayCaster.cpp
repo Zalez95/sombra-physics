@@ -16,7 +16,7 @@ namespace sphys {
 		glm::vec3 n(0.0f);
 		glm::vec3 v = SupportPoint(x, glm::vec3(0.0f), pointRandomW, pointRandomL).getCSOPosition();
 		Simplex simplex;
-		stdext::FixedVector<bool, 4> closestSimplexPoints;
+		stdext::ArrayVector<bool, 4> closestSimplexPoints;
 
 		float dist2 = glm::dot(v, v);
 		std::size_t iteration = 0;
@@ -86,7 +86,7 @@ namespace sphys {
 
 // Private functions
 	std::pair<bool, SupportPoint> GJKRayCaster::calculateClosestPoint(
-		const Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+		const Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 	) const
 	{
 		switch (simplex.size()) {
@@ -100,7 +100,7 @@ namespace sphys {
 
 
 	std::pair<bool, SupportPoint> GJKRayCaster::calculateClosestPoint1(
-		const Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+		const Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 	) const
 	{
 		closestPoints[0] = true;
@@ -109,7 +109,7 @@ namespace sphys {
 
 
 	std::pair<bool, SupportPoint> GJKRayCaster::calculateClosestPoint2(
-		const Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+		const Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 	) const
 	{
 		auto [inside, originBarycentricCoords] = projectPointOnEdge(
@@ -146,7 +146,7 @@ namespace sphys {
 
 
 	std::pair<bool, SupportPoint> GJKRayCaster::calculateClosestPoint3(
-		const Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+		const Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 	) const
 	{
 		auto [inside, originBarycentricCoords] = projectPointOnTriangle(
@@ -180,7 +180,7 @@ namespace sphys {
 
 
 	std::pair<bool, SupportPoint> GJKRayCaster::calculateClosestPoint4(
-		const Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints
+		const Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints
 	) const
 	{
 		bool success = false;
@@ -189,7 +189,7 @@ namespace sphys {
 		float minDistance = std::numeric_limits<float>::max();
 		for (int i = 0; i < 4; ++i) {
 			int iV1 = i % 3, iV2 = (i + 1) % 3, iV3 = (i + 2) % 3;
-			stdext::FixedVector<bool, 4> currentClosestPoints = { false, false, false, false };
+			stdext::ArrayVector<bool, 4> currentClosestPoints = { false, false, false, false };
 
 			auto [inside, originBarycentricCoords] = projectPointOnTriangle(
 				glm::vec3(0.0f),
@@ -229,7 +229,7 @@ namespace sphys {
 	}
 
 
-	void GJKRayCaster::reduce(Simplex& simplex, stdext::FixedVector<bool, 4>& closestPoints)
+	void GJKRayCaster::reduce(Simplex& simplex, stdext::ArrayVector<bool, 4>& closestPoints)
 	{
 		for (std::size_t i = 0; i < simplex.size();) {
 			if (!closestPoints[i]) {

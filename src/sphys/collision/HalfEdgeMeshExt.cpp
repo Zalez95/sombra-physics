@@ -125,7 +125,7 @@ namespace sphys {
 
 
 	glm::vec3 calculateVertexNormal(
-		const HalfEdgeMesh& meshData, const stdext::PackedVector<glm::vec3>& faceNormals,
+		const HalfEdgeMesh& meshData, const stdext::ReleaseVector<glm::vec3>& faceNormals,
 		int iVertex
 	) {
 		glm::vec3 normal(0.0f);
@@ -294,7 +294,7 @@ namespace sphys {
 
 	float calculateVolume(
 		const HalfEdgeMesh& meshData,
-		const stdext::PackedVector<glm::vec3>& faceNormals
+		const stdext::ReleaseVector<glm::vec3>& faceNormals
 	) {
 		// Get the centroid of the mesh
 		glm::vec3 centroid = calculateCentroid(meshData);
@@ -371,7 +371,7 @@ namespace sphys {
 
 
 	void calculateHorizon(
-		const HalfEdgeMesh& meshData, const stdext::PackedVector<glm::vec3>& faceNormals,
+		const HalfEdgeMesh& meshData, const stdext::ReleaseVector<glm::vec3>& faceNormals,
 		const glm::vec3& eyePoint, int iInitialFace,
 		std::vector<int>& horizonEdges, std::vector<int>& visibleFaces
 	) {

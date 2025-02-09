@@ -17,7 +17,7 @@ namespace sphys {
 		HalfEdgeMesh mMesh;
 
 		/** The HEVertices of the ConvexPolyhedron's in local space */
-		stdext::PackedVector<HEVertex> mLocalVertices;
+		stdext::ReleaseVector<HEVertex> mLocalVertices;
 
 		/** The transformation matrix of the ConvexPolyhedron */
 		glm::mat4 mTransformsMatrix;

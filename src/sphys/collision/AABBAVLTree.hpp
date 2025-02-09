@@ -94,7 +94,7 @@ namespace sphys {
 	{
 		std::vector<std::size_t> treeStack;
 
-		stdext::PackedVector<bool> traversedNodes;
+		stdext::ReleaseVector<bool> traversedNodes;
 		traversedNodes.replicate(mNodes, false);
 
 		for (auto itNode = mNodes.begin(); itNode != mNodes.end(); ++itNode) {
